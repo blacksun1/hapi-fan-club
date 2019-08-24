@@ -33,30 +33,34 @@ const manifest = {
             plugin: './server/proxytest/index'
         },
         {
-          plugin: "h2o2"
+            plugin: 'h2o2'
         },
         {
-          plugin: {
-            register: "good",
-            options: {
-              ops: {
-                interval: 30000
-              },
-              reporters: {
-                console: [{
-                    module: 'good-squeeze',
-                    name: 'Squeeze',
-                    args: [{
-                      log: '*',
-                      response: '*',
-                      ops: '*'
-                    }]
-                }, {
-                    module: 'good-console'
-                }, 'stdout']
-              }
+            plugin: {
+                register: 'good',
+                options: {
+                    ops: {
+                        interval: 30000
+                    },
+                    reporters: {
+                        console: [
+                            {
+                                module: 'good-squeeze',
+                                name: 'Squeeze',
+                                args: [{
+                                    log: '*',
+                                    response: '*',
+                                    ops: '*'
+                                }]
+                            },
+                            {
+                                module: 'good-console'
+                            },
+                            'stdout'
+                        ]
+                    }
+                }
             }
-          }
         }
     ]
 };
