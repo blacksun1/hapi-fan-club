@@ -3,14 +3,19 @@
 const Composer = require('./index');
 
 
-Composer((err, server) => {
+const main = async () => {
 
-    if (err) {
-        throw err;
-    }
-
-    server.start(() => {
+    try {
+        const server = await Composer();
+        await server.start();
 
         console.log('Started the plot device on port ' + server.info.port);
-    });
-});
+    }
+    catch (err) {
+        console.error('Application has crashed and burned');
+        console.error(err);
+        process.exit();
+    }
+};
+
+main();

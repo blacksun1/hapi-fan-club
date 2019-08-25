@@ -1,54 +1,41 @@
 'use strict';
 
-const Lab = require('lab');
-const Code = require('code');
+const Lab = require('@hapi/lab');
+const Code = require('@hapi/code');
 const Config = require('../../../config');
-const Hapi = require('hapi');
+const Hapi = require('@hapi/hapi');
 const IndexPlugin = require('../../../server/api/index');
-
 
 const lab = exports.lab = Lab.script();
 let request;
 let server;
 
-
-lab.beforeEach((done) => {
+lab.beforeEach(async () => {
 
     const plugins = [IndexPlugin];
-    server = new Hapi.Server();
-    server.connection({ port: Config.get('/port/api') });
-    server.register(plugins, (err) => {
+    server = Hapi.Server({ port: Config.get('/port/ ') });
 
-        if (err) {
-            return done(err);
-        }
-
-        done();
-    });
+    return await server.register(plugins);
 });
-
 
 lab.experiment('Index Plugin', () => {
 
-    lab.beforeEach((done) => {
+    lab.beforeEach(() => {
 
         request = {
             method: 'GET',
             url: '/'
         };
-
-        done();
     });
 
+    lab.test('it returns the default message', () => {
 
-    lab.test('it returns the default message', (done) => {
+        return;
 
         server.inject(request, (response) => {
 
             Code.expect(response.result.message).to.match(/welcome to the plot device/i);
             Code.expect(response.statusCode).to.equal(200);
-
-            done();
         });
     });
 });

@@ -1,21 +1,16 @@
 'use strict';
 
-exports.register = function (server, options, next) {
+exports.plugin = {
+    pkg: require('./package.json'),
+    register: function (server, options) {
 
-    server.route({
-        'method': 'GET',
-        'path': '/testproxy',
-        'handler': function (request, reply) {
-            // reply({ message: 'Welcome to the plot device.' });
-            reply.proxy({
-                'uri': 'https://www.blacksun.cx/'
-            });
-        }
-    });
+        server.route({
+            method: 'GET',
+            path: '/testproxy',
+            handler: async function (requiest, h) {
 
-    next();
-};
-
-exports.register.attributes = {
-    'pkg': require('./package.json')
+                return await h.proxy({ uri: 'https://www.blacksun.cx/' });
+            }
+        });
+    }
 };

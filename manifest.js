@@ -3,41 +3,34 @@
 const Confidence = require('confidence');
 const Config = require('./config');
 
-
 const criteria = {
     env: process.env.NODE_ENV
 };
 
-
 const manifest = {
     $meta: 'This file defines the plot device.',
     server: {
+        routes: {
+            security: true
+        },
         debug: {
             request: ['error']
         },
-        connections: {
-            routes: {
-                security: true
-            }
-        }
+        port: Config.get('/port/api')
     },
-    connections: [{
-        port: Config.get('/port/api'),
-        labels: ['api']
-    }],
-    registrations: [
-        {
-            plugin: './server/api/index'
-        },
-        {
-            plugin: './server/proxytest/index'
-        },
-        {
-            plugin: 'h2o2'
-        },
-        {
-            plugin: {
-                register: 'good',
+    register: {
+        plugins: [
+            {
+                plugin: './server/api/index'
+            },
+            {
+                plugin: './server/proxytest/index'
+            },
+            {
+                plugin: '@hapi/h2o2'
+            },
+            {
+                plugin: '@hapi/good',
                 options: {
                     ops: {
                         interval: 30000
@@ -45,7 +38,7 @@ const manifest = {
                     reporters: {
                         console: [
                             {
-                                module: 'good-squeeze',
+                                module: '@hapi/good-squeeze',
                                 name: 'Squeeze',
                                 args: [{
                                     log: '*',
@@ -54,15 +47,15 @@ const manifest = {
                                 }]
                             },
                             {
-                                module: 'good-console'
+                                module: '@hapi/good-console'
                             },
                             'stdout'
                         ]
                     }
                 }
             }
-        }
-    ]
+        ]
+    }
 };
 
 

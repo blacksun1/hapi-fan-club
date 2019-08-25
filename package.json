@@ -22,18 +22,19 @@
     "node": ">=4.0.0"
   },
   "dependencies": {
-    "confidence": "3.x.x",
-    "glue": "3.x.x",
-    "good": "^7.0.0",
-    "good-console": "^6.1.1",
-    "good-squeeze": "^3.0.1",
-    "h2o2": "^5.1.0",
-    "hapi": "13.x.x",
-    "hoek": "3.x.x"
+    "@hapi/glue": "^6.1.1",
+    "@hapi/good": "^8.2.1",
+    "@hapi/good-console": "^8.1.1",
+    "@hapi/good-squeeze": "^5.2.1",
+    "@hapi/h2o2": "^8.3.1",
+    "@hapi/hapi": "^18.3.2",
+    "@hapi/hoek": "^8.2.1",
+    "confidence": "^4.0.2"
   },
   "devDependencies": {
-    "code": "2.x.x",
-    "lab": "10.x.x",
-    "nodemon": "1.x.x"
+    "@hapi/code": "^6.0.0",
+    "@hapi/eslint-config-hapi": "^12.2.0",
+    "@hapi/lab": "^20.2.1",
+    "nodemon": "^1.19.1"
   }
 }

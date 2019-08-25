@@ -1,21 +1,18 @@
 'use strict';
 
-exports.register = function (server, options, next) {
+exports.plugin = {
 
-    server.route({
-        method: 'GET',
-        path: '/',
-        handler: function (request, reply) {
+    pkg: require('./package.json'),
 
-            reply({ message: 'Welcome to the plot device.' });
-        }
-    });
+    register: function (server, options) {
 
+        server.route({
+            method: 'GET',
+            path: '/',
+            handler: function (request, h) {
 
-    next();
-};
-
-
-exports.register.attributes = {
-    name: 'api'
+                return { message: 'Welcome to the plot device.' };
+            }
+        });
+    }
 };
